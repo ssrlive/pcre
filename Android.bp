@@ -31,7 +31,15 @@ libpcre2_src_files = [
 
 cc_defaults {
     name: "pcre_defaults",
-    cflags: ["-DHAVE_CONFIG_H"],
+    cflags: [
+        "-DHAVE_CONFIG_H",
+        "-Wall",
+        "-Werror",
+    ],
+    tidy_checks: [
+        "-google-build-using-namespace",
+        "-google-global-names-in-headers",
+    ],
     local_include_dirs: [
         "include_internal",
         "include",
@@ -45,14 +53,32 @@ cc_library {
     name: "libpcre2",
     defaults: ["pcre_defaults"],
     host_supported: true,
+    vendor_available: true,
+    vndk: {
+        enabled: true,
+    },
     srcs: libpcre2_src_files,
+    target: {
+        linux_bionic: {
+            enabled: true,
+        },
+    },
 }
 
 // === libpcrecpp targets ===
 
 cc_library_shared {
     name: "libpcrecpp",
-    cflags: ["-Wno-unused-parameter"],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-parameter",
+        "-Wno-unused-variable",
+    ],
+    tidy_checks: [
+        "-google-build-using-namespace",
+        "-google-global-names-in-headers",
+    ],
     local_include_dirs: ["pcrecpp/include"],
     shared_libs: ["libpcre2"],
     export_include_dirs: [
