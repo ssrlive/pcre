@@ -80,7 +80,8 @@ cc_defaults {
 }
 
 cc_binary {
-    name: "grep",
+    // http://b/111849261 - pcre2grep isn't POSIX enough yet.
+    name: "pcre2grep",
     defaults: ["grep_common"],
 }
 
