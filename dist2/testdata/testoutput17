@@ -335,7 +335,7 @@ Failed: error -47: match limit exceeded
     abc
 Failed: error -46: JIT stack limit reached
 
-/((?(R2)a+|(?1)b))/
+/((?(R2)a+|(?1)b))()/
     aaaabcde
 Failed: error -46: JIT stack limit reached
 
@@ -368,6 +368,7 @@ No match
 Capturing subpattern count = 0
 Compile options: <none>
 Overall options: anchored
+First code unit = 'a'
 Subject length lower bound = 6
 JIT compilation was successful
 #pop jitverify
@@ -379,6 +380,7 @@ JIT compilation was successful
 Capturing subpattern count = 0
 Compile options: <none>
 Overall options: anchored
+First code unit = 'a'
 Subject length lower bound = 6
 JIT compilation was successful
 #save testsaved1
