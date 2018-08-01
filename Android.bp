@@ -70,29 +70,6 @@ cc_library {
     },
 }
 
-//
-// PCRE grep
-//
-
-cc_defaults {
-    name: "grep_common",
-    defaults: ["pcre_defaults"],
-    srcs: [libpcre2_dist_prefix + "/src/pcre2grep.c"],
-    shared_libs: ["libpcre2"],
-}
-
-cc_binary {
-    // http://b/111849261 - pcre2grep isn't POSIX enough yet.
-    name: "pcre2grep",
-    defaults: ["grep_common"],
-}
-
-cc_binary {
-    name: "grep_vendor",
-    defaults: ["grep_common"],
-    stem: "grep",
-    vendor: true,
-}
 
 //
 // Google's C++ wrapper.
