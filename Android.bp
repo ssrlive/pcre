@@ -7,8 +7,10 @@ libpcre2_src_files = [
     libpcre2_dist_prefix + "/src/pcre2_compile.c",
     libpcre2_dist_prefix + "/src/pcre2_config.c",
     libpcre2_dist_prefix + "/src/pcre2_context.c",
+    libpcre2_dist_prefix + "/src/pcre2_convert.c",
     libpcre2_dist_prefix + "/src/pcre2_dfa_match.c",
     libpcre2_dist_prefix + "/src/pcre2_error.c",
+    libpcre2_dist_prefix + "/src/pcre2_extuni.c",
     libpcre2_dist_prefix + "/src/pcre2_find_bracket.c",
     libpcre2_dist_prefix + "/src/pcre2_maketables.c",
     libpcre2_dist_prefix + "/src/pcre2_match.c",
@@ -68,28 +70,6 @@ cc_library {
     },
 }
 
-//
-// PCRE grep
-//
-
-cc_defaults {
-    name: "grep_common",
-    defaults: ["pcre_defaults"],
-    srcs: [libpcre2_dist_prefix + "/src/pcre2grep.c"],
-    shared_libs: ["libpcre2"],
-}
-
-cc_binary {
-    name: "grep",
-    defaults: ["grep_common"],
-}
-
-cc_binary {
-    name: "grep_vendor",
-    defaults: ["grep_common"],
-    stem: "grep",
-    vendor: true,
-}
 
 //
 // Google's C++ wrapper.
