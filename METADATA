@@ -7,12 +7,12 @@ third_party {
   }
   url {
     type: ARCHIVE
-    value: "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre2-10.31.zip"
+    value: "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre2-10.32.zip"
   }
-  version: "10.31"
+  version: "10.32"
   last_upgrade_date {
     year: 2018
-    month: 2
-    day: 12
+    month: 9
+    day: 11
   }
 }
