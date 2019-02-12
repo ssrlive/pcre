@@ -61,6 +61,7 @@ cc_library {
     vndk: {
         enabled: true,
     },
+    double_loadable: true,
     recovery_available: true,
     srcs: libpcre2_src_files,
     target: {
