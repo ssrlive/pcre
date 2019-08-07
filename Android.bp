@@ -19,6 +19,7 @@ libpcre2_src_files = [
     libpcre2_dist_prefix + "/src/pcre2_newline.c",
     libpcre2_dist_prefix + "/src/pcre2_ord2utf.c",
     libpcre2_dist_prefix + "/src/pcre2_pattern_info.c",
+    libpcre2_dist_prefix + "/src/pcre2_script_run.c",
     libpcre2_dist_prefix + "/src/pcre2_serialize.c",
     libpcre2_dist_prefix + "/src/pcre2_string_utils.c",
     libpcre2_dist_prefix + "/src/pcre2_study.c",
@@ -95,7 +96,7 @@ cc_library_shared {
         "include",
     ],
     srcs: [
-	"pcrecpp/pcrecpp.cc",
+        "pcrecpp/pcrecpp.cc",
         "pcrecpp/pcre_scanner.cc",
         "pcrecpp/pcre_stringpiece.cc",
     ],
