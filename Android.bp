@@ -71,33 +71,3 @@ cc_library {
         },
     },
 }
-
-
-//
-// Google's C++ wrapper.
-//
-
-cc_library_shared {
-    name: "libpcrecpp",
-    cflags: [
-        "-Wall",
-        "-Werror",
-        "-Wno-unused-parameter",
-        "-Wno-unused-variable",
-    ],
-    tidy_checks: [
-        "-google-build-using-namespace",
-        "-google-global-names-in-headers",
-    ],
-    local_include_dirs: ["pcrecpp/include"],
-    shared_libs: ["libpcre2"],
-    export_include_dirs: [
-        "pcrecpp/include",
-        "include",
-    ],
-    srcs: [
-        "pcrecpp/pcrecpp.cc",
-        "pcrecpp/pcre_scanner.cc",
-        "pcrecpp/pcre_stringpiece.cc",
-    ],
-}
