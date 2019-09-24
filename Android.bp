@@ -65,6 +65,8 @@ cc_library {
     double_loadable: true,
     recovery_available: true,
     srcs: libpcre2_src_files,
+    stl: "none",
+    system_shared_libs: ["libc"],
     target: {
         linux_bionic: {
             enabled: true,
