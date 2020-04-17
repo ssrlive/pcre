@@ -38,6 +38,10 @@ cc_defaults {
         "-DHAVE_CONFIG_H",
         "-Wall",
         "-Werror",
+        // TODO(http://b/153760240): Remove this once we have
+        // patched sources to leave a large stack array uninitialized
+        // (stack_frames_vector from pcre2_match.c).
+        "-ftrivial-auto-var-init=uninitialized",
     ],
     tidy_checks: [
         "-google-build-using-namespace",
