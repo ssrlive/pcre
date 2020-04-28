@@ -85,7 +85,6 @@ dist_html_DATA = \
   doc/html/pcre2_set_parens_nest_limit.html \
   doc/html/pcre2_set_recursion_limit.html \
   doc/html/pcre2_set_recursion_memory_management.html \
-  doc/html/pcre2_set_substitute_callout.html \
   doc/html/pcre2_substitute.html \
   doc/html/pcre2_substring_copy_byname.html \
   doc/html/pcre2_substring_copy_bynumber.html \
@@ -179,7 +178,6 @@ dist_man_MANS = \
   doc/pcre2_set_parens_nest_limit.3 \
   doc/pcre2_set_recursion_limit.3 \
   doc/pcre2_set_recursion_memory_management.3 \
-  doc/pcre2_set_substitute_callout.3 \
   doc/pcre2_substitute.3 \
   doc/pcre2_substring_copy_byname.3 \
   doc/pcre2_substring_copy_bynumber.3 \
@@ -233,7 +231,7 @@ noinst_PROGRAMS =
 # and 'make maintainer-clean'.
 
 CLEANFILES =
-DISTCLEANFILES = src/config.h.in~
+DISTCLEANFILES = src/config.h.in~ config.h pcre2.h.generic
 MAINTAINERCLEANFILES =
 
 # Additional files to bundle with the distribution, over and above what
@@ -364,7 +362,6 @@ COMMON_SOURCES = \
   src/pcre2_newline.c \
   src/pcre2_ord2utf.c \
   src/pcre2_pattern_info.c \
-  src/pcre2_script_run.c \
   src/pcre2_serialize.c \
   src/pcre2_string_utils.c \
   src/pcre2_study.c \
@@ -531,10 +528,6 @@ noinst_PROGRAMS += pcre2fuzzcheck
 pcre2fuzzcheck_SOURCES = src/pcre2_fuzzsupport.c
 pcre2fuzzcheck_CFLAGS = -DSTANDALONE $(AM_CFLAGS)
 pcre2fuzzcheck_LDADD = libpcre2-8.la
-if WITH_GCOV
-pcre2fuzzcheck_CFLAGS += $(GCOV_CFLAGS)
-pcre2fuzzcheck_LDADD += $(GCOV_LIBS)
-endif # WITH_GCOV
 endif # WITH FUZZ_SUPPORT
 endif # WITH_PCRE2_8
 
@@ -625,7 +618,6 @@ EXTRA_DIST += \
   testdata/grepoutput \
   testdata/grepoutput8 \
   testdata/grepoutputC \
-  testdata/grepoutputCN \
   testdata/grepoutputN \
   testdata/greppatN4 \
   testdata/testinput1 \
