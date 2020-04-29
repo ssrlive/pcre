@@ -72,6 +72,24 @@ AC_PROG_LN_S
 
 PCRE2_VISIBILITY
 
+# Check for Clang __attribute__((uninitialized)) feature
+
+AC_MSG_CHECKING([for __attribute__((uninitialized))])
+AC_LANG_PUSH([C])
+tmp_CFLAGS=$CFLAGS
+CFLAGS="$CFLAGS -Werror"
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM(,
+                   [[char buf[128] __attribute__((uninitialized));(void)buf]])],
+                   [pcre2_cc_cv_attribute_uninitialized=yes],
+                   [pcre2_cc_cv_attribute_uninitialized=no])
+AC_MSG_RESULT([$pcre2_cc_cv_attribute_uninitialized])
+if test "$pcre2_cc_cv_attribute_uninitialized" = yes; then
+  AC_DEFINE([HAVE_ATTRIBUTE_UNINITIALIZED], 1, [Define this if your compiler
+             supports __attribute__((uninitialized))])
+fi
+CFLAGS=$tmp_CFLAGS
+AC_LANG_POP([C])
+
 # Versioning
 
 PCRE2_MAJOR="pcre2_major"
