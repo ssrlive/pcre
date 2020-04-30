@@ -107,8 +107,9 @@ FIND_PACKAGE( Editline )
 
 # Configuration checks
 
-INCLUDE(CheckIncludeFile)
+INCLUDE(CheckCSourceCompiles)
 INCLUDE(CheckFunctionExists)
+INCLUDE(CheckIncludeFile)
 INCLUDE(CheckTypeSize)
 
 CHECK_INCLUDE_FILE(dirent.h     HAVE_DIRENT_H)
@@ -122,6 +123,14 @@ CHECK_INCLUDE_FILE(windows.h    HAVE_WINDOWS_H)
 CHECK_FUNCTION_EXISTS(bcopy     HAVE_BCOPY)
 CHECK_FUNCTION_EXISTS(memmove   HAVE_MEMMOVE)
 CHECK_FUNCTION_EXISTS(strerror  HAVE_STRERROR)
+
+set(ORIG_CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS})
+set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -Werror")
+CHECK_C_SOURCE_COMPILES(
+  "int main() { char buf[128] __attribute__((uninitialized)); (void)buf; return 0; }"
+  HAVE_ATTRIBUTE_UNINITIALIZED
+)
+set(CMAKE_REQUIRED_FLAGS ${ORIG_CMAKE_REQUIRED_FLAGS})
 
 # User-configurable options
 #
