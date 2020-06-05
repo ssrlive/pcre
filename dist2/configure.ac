@@ -9,18 +9,18 @@ dnl The PCRE2_PRERELEASE feature is for identifying release candidates. It might
 dnl be defined as -RC2, for example. For real releases, it should be empty.
 
 m4_define(pcre2_major, [10])
-m4_define(pcre2_minor, [33])
+m4_define(pcre2_minor, [35])
 m4_define(pcre2_prerelease, [])
-m4_define(pcre2_date, [2019-04-16])
+m4_define(pcre2_date, [2020-05-09])
+
+# Libtool shared library interface versions (current:revision:age)
+m4_define(libpcre2_8_version,     [10:0:10])
+m4_define(libpcre2_16_version,    [10:0:10])
+m4_define(libpcre2_32_version,    [10:0:10])
+m4_define(libpcre2_posix_version, [2:3:0])
 
 # NOTE: The CMakeLists.txt file searches for the above variables in the first
 # 50 lines of this file. Please update that if the variables above are moved.
-
-# Libtool shared library interface versions (current:revision:age)
-m4_define(libpcre2_8_version,     [8:0:8])
-m4_define(libpcre2_16_version,    [8:0:8])
-m4_define(libpcre2_32_version,    [8:0:8])
-m4_define(libpcre2_posix_version, [2:2:0])
 
 AC_PREREQ(2.57)
 AC_INIT(PCRE2, pcre2_major.pcre2_minor[]pcre2_prerelease, , pcre2)
@@ -176,11 +176,18 @@ if test "$enable_jit" = "auto"; then
   echo checking for JIT support on this hardware... $enable_jit
 fi
 
-# Handle --enable-jit-sealloc (disabled by default)
-AC_ARG_ENABLE(jit-sealloc,
-              AS_HELP_STRING([--enable-jit-sealloc],
-                             [enable SELinux compatible execmem allocator in JIT]),
-              , enable_jit_sealloc=no)
+# Handle --enable-jit-sealloc (disabled by default and only experimental)
+case $host_os in
+  linux* | netbsd*)
+    AC_ARG_ENABLE(jit-sealloc,
+      AS_HELP_STRING([--enable-jit-sealloc],
+        [enable SELinux compatible execmem allocator in JIT (experimental)]),
+        ,enable_jit_sealloc=no)
+    ;;
+  *)
+    enable_jit_sealloc=unsupported
+    ;;
+esac
 
 # Handle --disable-pcre2grep-jit (enabled by default)
 AC_ARG_ENABLE(pcre2grep-jit,
@@ -507,7 +514,7 @@ AC_TYPE_SIZE_T
 
 # Checks for library functions.
 
-AC_CHECK_FUNCS(bcopy memmove strerror mkostemp secure_getenv)
+AC_CHECK_FUNCS(bcopy memfd_create memmove mkostemp secure_getenv strerror)
 
 # Check for the availability of libz (aka zlib)
 
