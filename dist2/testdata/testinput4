@@ -804,10 +804,10 @@
     \x{4d00}
     \x{4db4}
     \x{4db5}     
+    \x{4db6} 
 \= Expect no match
     a 
     \x{2b0}
-    \x{4db6} 
   
 /^\p{Lt}/utf
     \x{1c5}
@@ -2479,5 +2479,16 @@
 
 /^(?'אABC'...)(?&אABC)/utf
     123123123456
+
+/\X*/
+    \xF3aaa\xE4\xEA\xEB\xFEa
+
+/Я/i,utf
+    \x{42f} 
+    \x{44f} 
+
+/(?=Я)/i,utf
+    \x{42f} 
+    \x{44f} 
 
 # End of testinput4
