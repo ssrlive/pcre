@@ -46,6 +46,7 @@ dist_html_DATA = \
   doc/html/pcre2_general_context_free.html \
   doc/html/pcre2_get_error_message.html \
   doc/html/pcre2_get_mark.html \
+  doc/html/pcre2_get_match_data_size.html \
   doc/html/pcre2_get_ovector_count.html \
   doc/html/pcre2_get_ovector_pointer.html \
   doc/html/pcre2_get_startchar.html \
@@ -56,6 +57,7 @@ dist_html_DATA = \
   doc/html/pcre2_jit_stack_create.html \
   doc/html/pcre2_jit_stack_free.html \
   doc/html/pcre2_maketables.html \
+  doc/html/pcre2_maketables_free.html \
   doc/html/pcre2_match.html \
   doc/html/pcre2_match_context_copy.html \
   doc/html/pcre2_match_context_create.html \
@@ -140,6 +142,7 @@ dist_man_MANS = \
   doc/pcre2_general_context_free.3 \
   doc/pcre2_get_error_message.3 \
   doc/pcre2_get_mark.3 \
+  doc/pcre2_get_match_data_size.3 \
   doc/pcre2_get_ovector_count.3 \
   doc/pcre2_get_ovector_pointer.3 \
   doc/pcre2_get_startchar.3 \
@@ -150,6 +153,7 @@ dist_man_MANS = \
   doc/pcre2_jit_stack_create.3 \
   doc/pcre2_jit_stack_free.3 \
   doc/pcre2_maketables.3 \
+  doc/pcre2_maketables_free.3 \
   doc/pcre2_match.3 \
   doc/pcre2_match_context_copy.3 \
   doc/pcre2_match_context_create.3 \
@@ -321,18 +325,18 @@ include_HEADERS = src/pcre2posix.h
 bin_SCRIPTS = pcre2-config
 
 ## ---------------------------------------------------------------
-## The dftables program is used to rebuild character tables before compiling
-## PCRE2, if --enable-rebuild-chartables is specified. It is not a user-visible
-## program. The default (when --enable-rebuild-chartables is not specified) is
-## to copy a distributed set of tables that are defined for ASCII code. In this
-## case, dftables is not needed.
+## The pcre2_dftables program is used to rebuild character tables before
+## compiling PCRE2, if --enable-rebuild-chartables is specified. It is not an
+## installed program. The default (when --enable-rebuild-chartables is not
+## specified) is to copy a distributed set of tables that are defined for ASCII
+## code. In this case, pcre2_dftables is not needed.
 
 if WITH_REBUILD_CHARTABLES
-noinst_PROGRAMS += dftables
-dftables_SOURCES = src/dftables.c
-src/pcre2_chartables.c: dftables$(EXEEXT)
+noinst_PROGRAMS += pcre2_dftables
+pcre2_dftables_SOURCES = src/pcre2_dftables.c
+src/pcre2_chartables.c: pcre2_dftables$(EXEEXT)
 	rm -f $@
-	./dftables$(EXEEXT) $@
+	./pcre2_dftables$(EXEEXT) $@
 else
 src/pcre2_chartables.c: $(srcdir)/src/pcre2_chartables.c.dist
 	rm -f $@
@@ -358,6 +362,8 @@ COMMON_SOURCES = \
   src/pcre2_internal.h \
   src/pcre2_intmodedep.h \
   src/pcre2_jit_compile.c \
+  src/pcre2_jit_neon_inc.h \
+  src/pcre2_jit_simd_inc.h \
   src/pcre2_maketables.c \
   src/pcre2_match.c \
   src/pcre2_match_data.c \
@@ -628,6 +634,7 @@ EXTRA_DIST += \
   testdata/grepoutputCN \
   testdata/grepoutputN \
   testdata/greppatN4 \
+  testdata/testbtables \
   testdata/testinput1 \
   testdata/testinput2 \
   testdata/testinput3 \
