@@ -7,13 +7,13 @@ third_party {
   }
   url {
     type: ARCHIVE
-    value: "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre2-10.33.zip"
+    value: "https://ftp.pcre.org/pub/pcre/pcre2-10.37.tar.gz"
   }
-  version: "10.33"
+  version: "10.37"
   license_type: NOTICE
   last_upgrade_date {
-    year: 2019
-    month: 8
-    day: 7
+    year: 2021
+    month: 6
+    day: 8
   }
 }
