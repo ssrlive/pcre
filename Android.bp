@@ -102,8 +102,10 @@ cc_library {
     recovery_available: true,
     srcs: libpcre2_src_files,
     stl: "none",
-    system_shared_libs: ["libc"],
     target: {
+        bionic: {
+            system_shared_libs: ["libc"],
+        },
         linux_bionic: {
             enabled: true,
         },
