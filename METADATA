@@ -7,13 +7,13 @@ third_party {
   }
   url {
     type: ARCHIVE
-    value: "https://ftp.pcre.org/pub/pcre/pcre2-10.37.tar.gz"
+    value: "https://github.com/PhilipHazel/pcre2/releases/download/pcre2-10.38/pcre2-10.38.tar.gz"
   }
-  version: "10.37"
+  version: "pcre2-10.38"
   license_type: NOTICE
   last_upgrade_date {
     year: 2021
-    month: 6
-    day: 8
+    month: 10
+    day: 1
   }
 }
