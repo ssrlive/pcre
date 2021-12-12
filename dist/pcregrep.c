@@ -828,6 +828,8 @@ return FALSE;
 in their libraries, but can provide the same facility by this simple
 alternative function. */
 
+#if !defined(_MSC_VER)
+
 extern int   sys_nerr;
 extern char *sys_errlist[];
 
@@ -837,6 +839,9 @@ strerror(int n)
 if (n < 0 || n >= sys_nerr) return "unknown error number";
 return sys_errlist[n];
 }
+
+#endif
+
 #endif /* HAVE_STRERROR */
 
 

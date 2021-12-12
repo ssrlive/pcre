@@ -64,9 +64,12 @@
     <ClCompile Include="..\dist\pcre_xclass.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\dist\pcreposix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pcre.h">
+    <ClInclude Include="../pcre.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="config.h">
