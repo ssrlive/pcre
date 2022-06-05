@@ -2737,7 +2737,7 @@ for (i = 1; i < argc; i++)
       else
         {
         char buff1[24];
-        char buff2[24];
+        char buff2[48];
 
         int baselen = (int)(opbra - op->long_name);
         int fulllen = (int)(strchr(op->long_name, ')') - op->long_name + 1);
